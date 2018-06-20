@@ -2,18 +2,19 @@
 
 namespace Lle\OAuthClientBundle\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class OAuthClientExtension extends ConfigurableExtension
+class OAuthClientExtension extends Extension
 {
-
-    protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-        
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        $container->setParameter('lle_oauth_client.config', $config);
     }
 
     /**
+     * We don't want Symfony to call it o_auth_client.
      * @return string
      */
     public function getAlias()
