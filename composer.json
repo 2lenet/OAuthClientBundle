@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Lle\\OAuthClient\\": "src/"
+            "Lle\\OAuthClientBundle\\": "src/"
         }
     }
 }
