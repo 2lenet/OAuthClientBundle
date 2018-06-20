@@ -1,0 +1,14 @@
+login:
+    path: /login
+    defaults:
+        _controller: OAuthClientBundle:Security:login
+
+login_check:
+    path: /login_check
+    defaults:
+        _controller: OAuthClientBundle:Security:loginCheck
+
+logout_oauth:
+    path: /logout_oauth
+    defaults:
+        _controller: OAuthClientBundle:Security:logoutOauth
