@@ -3,7 +3,8 @@
     "type": "symfony-bundle",
     "description": "The 2LE's OAuth Client Bundle.",
     "require": {
-	      "php": ">=7.2"
+	      "php": ">=7.2",
+          "knpuniversity/oauth2-client-bundle": "^1.19"
     },
     "autoload": {
         "psr-4": {
