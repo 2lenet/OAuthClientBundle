@@ -1,0 +1,14 @@
+{
+    "name": "2lenet/oauth-client-bundle",
+    "type": "symfony-bundle",
+    "description": "The 2LE's OAuth Client Bundle.",
+    "require": {
+	      "php": ">=7.2"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Lle\\OAuthClient\\": "src/"
+        }
+    }
+}
