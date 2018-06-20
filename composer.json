@@ -2,6 +2,7 @@
     "name": "2lenet/oauth-client-bundle",
     "type": "symfony-bundle",
     "description": "The 2LE's OAuth Client Bundle.",
+    "license": "MIT",
     "require": {
 	      "php": ">=7.2",
           "knpuniversity/oauth2-client-bundle": "^1.19"
