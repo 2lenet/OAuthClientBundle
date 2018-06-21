@@ -4,7 +4,7 @@ OAuth client bundle for 2le.
 
 ## Installation
 
-(à remplir)
+```composer require 2lenet/oauth-client-bundle```
 
 ## Mise en place
 
