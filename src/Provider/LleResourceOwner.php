@@ -14,7 +14,7 @@ class LleResourceOwner implements ResourceOwnerInterface
     private $token;
 
     /**
-     * Creates new resource owner.
+     * Creates a new resource owner.
      *
      * @param array $response
      */

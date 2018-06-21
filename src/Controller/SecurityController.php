@@ -34,6 +34,6 @@ class SecurityController extends Controller
      */
     public function logoutOAuthAction()
     {
-        return $this->redirect($this->container->getParameter("lle_oauth_client.config")["server_domain"] . 'logout');
+        return $this->redirect(getenv('DOMAIN') . 'logout');
     }
 }

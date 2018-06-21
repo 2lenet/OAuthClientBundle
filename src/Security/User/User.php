@@ -13,6 +13,11 @@ class User implements UserInterface
     private $prenom;
     private $codeClient;
     private $email;
+    
+    /**
+     * Whether the user has activated two factor authentication
+     * @var boolean
+     */
     private $a2fActivated;
 
     public function __construct($username)

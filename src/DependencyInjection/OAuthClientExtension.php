@@ -13,11 +13,6 @@ class OAuthClientExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        // read yaml from knpu oauth2 client
-        // $config_path = __DIR__ . '/../Resources/config/knpu_oauth2_client_config.yaml';
-        // $yaml = (new Parser())->parse(file_get_contents($config_path));
-        // put it in symfony
-
         // SERVICES
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
