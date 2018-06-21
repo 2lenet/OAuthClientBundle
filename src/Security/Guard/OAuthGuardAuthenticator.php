@@ -51,7 +51,7 @@ class OAuthGuardAuthenticator extends SocialAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         // Redirection après connexion
-        return new RedirectResponse($this->router->generate('easyadmin'));
+        return new RedirectResponse($request->getSession()->get("_security.main.target_path"));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
