@@ -19,9 +19,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        login:
-            pattern: ^/login$
-            security: false
         main:
             pattern: ^/
             provider: main
@@ -73,7 +70,7 @@ knpu_oauth2_client:
             redirect_route: login_check
 ```
 
-Add this to `.env` and complete. Domain should end with a slash.
+Add this to `.env` and complete. Domain is the *server* domain. It should end with a slash.
 
 ```
 ###> OAuth ###
