@@ -12,7 +12,7 @@ class SecurityController extends Controller
      * Login route that redirects to server.
      * @Route("/login", name="login")
      */
-    public function loginAction()
+    public function login()
     {
         return $this->get('oauth2.registry')
         ->getClient('2le_oauth')
@@ -23,7 +23,7 @@ class SecurityController extends Controller
      * Check route. Should be handled by the GuardAuthenticator.
      * @Route("/login_check", name="login_check")
      */
-    public function loginCheckAction()
+    public function loginCheck()
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
     }
@@ -32,7 +32,7 @@ class SecurityController extends Controller
      * Logout from the server.
      * @Route("/logout_oauth", name="logout_oauth")
      */
-    public function logoutOAuthAction()
+    public function logoutOAuth()
     {
         return $this->redirect(getenv('DOMAIN') . 'logout');
     }

@@ -1,14 +1,14 @@
 login:
     path: /login
     defaults:
-        _controller: OAuthClientBundle:Security:login
+        _controller: Lle\OAuthClientBundle\Controller\SecurityController::login
 
 login_check:
     path: /login_check
     defaults:
-        _controller: OAuthClientBundle:Security:loginCheck
+        _controller: Lle\OAuthClientBundle\Controller\SecurityController::loginCheck
 
 logout_oauth:
     path: /logout_oauth
     defaults:
-        _controller: OAuthClientBundle:Security:logoutOauth
+        _controller: Lle\OAuthClientBundle\Controller\SecurityController::logoutOauth
