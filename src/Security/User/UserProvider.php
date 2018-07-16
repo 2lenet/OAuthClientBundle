@@ -37,6 +37,7 @@ class UserProvider implements UserProviderInterface
         $user = new User($resource_owner->getUsername());
 
         $user->setRoles($resource_owner->getRoles());
+        $user->setId($resource_owner->getId());
         $user->setNom($resource_owner->getNom());
         $user->setPrenom($resource_owner->getPrenom());
         $user->setCodeClient($resource_owner->getCodeClient());

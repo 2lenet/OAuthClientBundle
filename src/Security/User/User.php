@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
 {
+    private $id;
     private $username;
     private $roles;
     private $nom;
@@ -44,6 +45,22 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // Does nothing.
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
