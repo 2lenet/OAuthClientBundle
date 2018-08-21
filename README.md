@@ -6,7 +6,7 @@ OAuth client bundle for 2le.
 
 ```composer require 2lenet/oauth-client-bundle```
 
-## Mise en place
+## Configuration
 
 Add this to `packages/security.yaml`.
 
