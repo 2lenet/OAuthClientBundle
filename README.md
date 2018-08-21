@@ -73,11 +73,11 @@ knpu_oauth2_client:
 Add this to `.env` and complete. Domain is the *server* domain. It should end with a slash.
 
 ```
-###> OAuth ###
+###> 2lenet/OAuthClientBundle ###
 CLIENT_ID=
 CLIENT_SECRET=
 DOMAIN=
-###< OAuth ###
+###< 2lenet/OAuthClientBundle ###
 
 ```
 
