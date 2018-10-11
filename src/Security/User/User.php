@@ -13,6 +13,7 @@ class User implements UserInterface
     private $nom;
     private $prenom;
     private $codeClient;
+    private $originCodeClient;
     private $email;
     
     /**
@@ -143,6 +144,22 @@ class User implements UserInterface
         $this->codeClient = $codeClient;
     }
 
+    /**
+     * @return string
+     */
+    public function getOriginCodeClient()
+    {
+        return $this->originCodeClient;
+    }
+
+    /**
+     * @param string $originCodeClient
+     */
+    public function setOriginCodeClient($originCodeClient)
+    {
+        $this->originCodeClient = $originCodeClient;
+    }
+    
     /**
      * @return string
      */
