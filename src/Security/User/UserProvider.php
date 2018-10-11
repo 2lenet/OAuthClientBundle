@@ -41,6 +41,7 @@ class UserProvider implements UserProviderInterface
         $user->setNom($resource_owner->getNom());
         $user->setPrenom($resource_owner->getPrenom());
         $user->setCodeClient($resource_owner->getCodeClient());
+        $user->setOriginCodeClient($resource_owner->getCodeClient());
         $user->setEmail($resource_owner->getEmail());
         $user->setA2fActivated($resource_owner->getA2fActivated());
 
