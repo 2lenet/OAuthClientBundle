@@ -24,13 +24,26 @@ class UserAdminController extends Controller
 
     public function index($page=1)
     {
-        $client   = $this->get('eight_points_guzzle.client.connect');
-        $url = '/api/users';
+        $guzzle   = $this->get('eight_points_guzzle.client.connect');
         $user = $this->getUser();
         $code = explode('/', $user->getCodeClient())[0];
-        $url .= "?pagination=false&page=$page&codeClient=$code%2F";
-        $res = $client->get($url);
-        $users = json_decode($res->getBody(), true);
+
+        $response = $guzzle->request('POST', "/api/login_check"
+            , [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => json_encode(["username" => "tmpuser", "password"=> "tmppassword"])
+            ]);
+        $r = json_decode($response->getBody()->getContents());
+        $response = $guzzle->request('GET', "/api/users?pagination=false&page=$page&codeClient=$code%2F",
+            ['headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'authorization' => 'Bearer '.$r->token
+            ]]);
+        $users = json_decode($response->getBody()->getContents());
         return $this->render("@OAuthClient/user_admin.html.twig", array(
             "users" => $users,
         ));
