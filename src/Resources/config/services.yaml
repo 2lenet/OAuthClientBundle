@@ -9,3 +9,6 @@ services:
 
     lle_oauth_guard:
         class: Lle\OAuthClientBundle\Security\Guard\OAuthGuardAuthenticator
+
+    lle_oauth_user_admin:
+        class: Lle\OAuthClientBundle\Controller\UserAdminController

@@ -12,3 +12,7 @@ logout_oauth:
     path: /logout_oauth
     defaults:
         _controller: Lle\OAuthClientBundle\Controller\SecurityController::logoutOauth
+
+controllers:
+    resource: ../../Controller/
+    type: annotation
