@@ -60,6 +60,37 @@ class UserAdminController extends Controller
 
     /**
      * admin index.
+     * @Route("/admin/user/edit/{id}", name="admin_user_edit")
+     */
+
+    public function edit(Request $request, $id)
+    {
+        $data = $request->query->all();
+        $this->addFlash('success', 'Utilisateur modifié');
+        foreach($data as $k => $v){
+            if($k === 'isActive'){
+                $data[$k] = (bool)$v;
+            }
+        }
+        $this->url('/api/users/'.$id, 'PUT', $data);
+        return $this->redirectToRoute('admin_user');
+    }
+
+    /**
+     * admin index.
+     * @Route("/admin/user/delete/{id}", name="admin_user_delete")
+     */
+
+    public function delete(Request $request, $id)
+    {
+        $data = $request->query->all();
+        $this->addFlash('success', 'Utilisateur supprimé');
+        $this->url('/api/users/'.$id, 'DELETE');
+        return $this->redirectToRoute('admin_user');
+    }
+
+    /**
+     * admin index.
      * @Route("/admin/user/new", name="admin_user_new")
      */
 

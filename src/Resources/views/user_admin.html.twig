@@ -35,18 +35,28 @@
         <th>Email</th>
         <th>Roles</th>
         <th>Service</th>
+        <th>Actions</th>
     </tr>
 
     {% for user in users %}
     <tr>
         <td>{{user.username}}</td>
-        <td>{% if user.isActive %}<span class="label label-success">Oui</span>{%  else %}<span class="label label-danger">Non</span>{%  endif %}</td>
+        <td>
+            {% if user.isActive %}
+                <a href="{{ path('admin_user_edit', {'isActive':false, 'id': user.id}) }}" class="label label-success">Oui</a>
+            {%  else %}
+                <a href="{{ path('admin_user_edit', {'isActive':true, 'id': user.id}) }}" class="label label-danger">Non</a>
+            {%  endif %}
+        </td>
         <td>{{user.lastname}}</td>
         <td>{{user.firstname}}</td>
         {#<td>{{ dump(user) }}</td>#}
         <td>{{user.email}}</td>
         <td>{% for role in user.roles %}{{role}}&nbsp;{% endfor %}</td>
         <td>{{user.codeClient|split('/')[1] |service_name}}</td>
+        <td><a onclick="return confirm('Voulez vous vraiment supprimer cette utilisateur ?');" href="{{ path('admin_user_delete', {'id': user.id}) }}" style="color:#fff;" class=" text-danger action-delete btn btn-danger">
+                <i class="fa fa-trash"></i>&nbsp;Supprimer</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
