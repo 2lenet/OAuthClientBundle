@@ -31,7 +31,7 @@
         <th>Actif</th>
         <th>Nom</th>
         <th>Prenom</th>
-        {#<th>Dernière connexion</th>#}
+        <th>Dernière connexion</th>
         <th>Email</th>
         <th>Roles</th>
         <th>Service</th>
@@ -50,7 +50,7 @@
         </td>
         <td>{{user.lastname}}</td>
         <td>{{user.firstname}}</td>
-        {#<td>{{ dump(user) }}</td>#}
+        <td>{%  if user.lastConnection %}{{ user.lastConnection|date('d/m/Y h:i') }}{%  endif %}</td>
         <td>{{user.email}}</td>
         <td>{% for role in user.roles %}{{role}}&nbsp;{% endfor %}</td>
         <td>{{user.codeClient|split('/')[1] |service_name}}</td>

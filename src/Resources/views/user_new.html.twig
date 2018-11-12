@@ -3,13 +3,19 @@
 {% block page_title %}Dashboard{% endblock %}
 {% block content_title %} {{ 'title.user.admin_new'|trans }} {%  endblock %}
 {% block main %}
+    <style>
+        #form_roles label{
+            padding-right:5px;
+        }
+    </style>
+    {% block entity_form %}
+        <section id="main" class="content">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </section>
+    {%  endblock %}
 
-    {{ parent() }}
 
-
-    <section id="main" class="content">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
-    </section>
 {% endblock %}
+
