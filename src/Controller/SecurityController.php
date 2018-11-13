@@ -8,10 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SecurityController extends Controller
 {
-    /**
-     * Login route that redirects to server.
-     * @Route("/login", name="login")
-     */
+
     public function login()
     {
         return $this->get('oauth2.registry')
@@ -19,19 +16,12 @@ class SecurityController extends Controller
         ->redirect();
     }
 
-    /**
-     * Check route. Should be handled by the GuardAuthenticator.
-     * @Route("/login_check", name="login_check")
-     */
     public function loginCheck()
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
     }
 
-    /**
-     * Logout from the server.
-     * @Route("/logout_oauth", name="logout_oauth")
-     */
+
     public function logoutOAuth()
     {
         return $this->redirect(getenv('DOMAIN') . 'logout');

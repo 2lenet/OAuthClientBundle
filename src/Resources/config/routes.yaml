@@ -13,6 +13,22 @@ logout_oauth:
     defaults:
         _controller: Lle\OAuthClientBundle\Controller\SecurityController::logoutOauth
 
-controllers:
-    resource: ../../Controller/
-    type: annotation
+admin_user:
+    path: /admin/user/{page}
+    requirements:
+        page: \d+
+    defaults:
+        page: 1
+        _controller: Lle\OAuthClientBundle\Controller\UserAdminController::index
+
+admin_user_edit:
+    path: /admin/user/edit/{id}
+    controller: Lle\OAuthClientBundle\Controller\UserAdminController::edit
+
+admin_user_delete:
+    path: /admin/user/delete/{id}
+    controller: Lle\OAuthClientBundle\Controller\UserAdminController::delete
+
+admin_user_new:
+    path: /admin/user/new
+    controller: Lle\OAuthClientBundle\Controller\UserAdminController::new

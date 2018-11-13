@@ -10,5 +10,13 @@ services:
     lle_oauth_guard:
         class: Lle\OAuthClientBundle\Security\Guard\OAuthGuardAuthenticator
 
-    lle_oauth_user_admin:
-        class: Lle\OAuthClientBundle\Controller\UserAdminController
+    Lle\OAuthClientBundle\Service\OAuthApi:
+        arguments: ['@eight_points_guzzle.client.connect']
+
+    Lle\OAuthClientBundle\Controller\UserAdminController:
+        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi']
+        tags: ['controller.service_arguments']
+
+    Lle\OAuthClientBundle\Form\UserType:
+        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi']
+        tags: ['form.type']
