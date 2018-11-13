@@ -11,12 +11,10 @@ services:
         class: Lle\OAuthClientBundle\Security\Guard\OAuthGuardAuthenticator
 
     Lle\OAuthClientBundle\Service\OAuthApi:
-        arguments: ['@eight_points_guzzle.client.connect']
+        arguments: ['%lle.oauth_client.domain%','%lle.oauth_client.default_user%', '%lle.oauth_client.default_password%']
 
     Lle\OAuthClientBundle\Controller\UserAdminController:
         arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi']
         tags: ['controller.service_arguments']
 
-    Lle\OAuthClientBundle\Form\UserType:
-        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi']
-        tags: ['form.type']
+

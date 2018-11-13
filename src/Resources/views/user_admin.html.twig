@@ -52,8 +52,8 @@
         <td>{{user.firstname}}</td>
         <td>{%  if user.lastConnection %}{{ user.lastConnection|date('d/m/Y h:i') }}{%  endif %}</td>
         <td>{{user.email}}</td>
-        <td>{% for role in user.roles %}{{role}}&nbsp;{% endfor %}</td>
-        <td>{{user.codeClient|split('/')[1] |service_name}}</td>
+        <td>{{ user.roles|join(' ')[0:70] }}...</td>
+        <td>{{ user.codeClient|split('/')[1] |service_name }}</td>
         <td><a onclick="return confirm('Voulez vous vraiment supprimer cette utilisateur ?');" href="{{ path('admin_user_delete', {'id': user.id}) }}" style="color:#fff;" class=" text-danger action-delete btn btn-danger">
                 <i class="fa fa-trash"></i>&nbsp;Supprimer</a>
         </td>

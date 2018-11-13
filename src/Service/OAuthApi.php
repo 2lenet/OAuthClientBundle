@@ -7,26 +7,36 @@ use GuzzleHttp\Client;
 class OAuthApi{
 
     private $guzzle;
+    private $defaultUser;
+    private $defaultPassword;
+    private $token;
 
-    public function __construct(Client $guzzle){
-        $this->guzzle = $guzzle;
+    public function __construct(string $domain, string $defaultUser, string $defaultPassword){
+        $this->guzzle = new Client(['base_uri' => $domain]);
+        $this->defaultPassword = $defaultPassword;
+        $this->defaultUser = $defaultUser;
+    }
+
+    public function login(){
+        $response = $this->guzzle->request('POST', "/api/login_check",[
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            'body' => json_encode(["username" => $this->defaultUser ,"password"=> $this->defaultPassword])
+        ]);
+        $r = json_decode($response->getBody()->getContents());
+        $this->token = $r->token;
     }
 
     public function url($url, $method = "GET", $data = null){
-
-        $response = $this->guzzle->request('POST', "/api/login_check"
-            ,[
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                ],
-                'body' => json_encode(["username" => "tmpuser","password"=> "tmppassword"])
-            ]);
-        $r = json_decode($response->getBody()->getContents());
+        if(!$this->token){
+            $this->login();
+        }
         $options = ['headers' => [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'authorization' => 'Bearer '.$r->token
+            'authorization' => 'Bearer '.$this->token
         ]];
         if($data){
             $options['body'] = json_encode($data);
@@ -69,5 +79,9 @@ class OAuthApi{
             }
         }
         return $roles;
+    }
+
+    public function sendEmail(){
+        return $this->url('/api/utils/send', 'POST');
     }
 }
