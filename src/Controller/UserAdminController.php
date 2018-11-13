@@ -28,7 +28,7 @@ class UserAdminController extends Controller
 
         $user = $this->getUser();
         $code = explode('/', $user->getCodeClient())[0];
-        $users = $this->api->get($page, $code);
+        $users = $this->api->get(['page'=>$page, 'codeClient'=> $code."%2F", 'pagination' => false]);
         return $this->render("@OAuthClient/user_admin.html.twig", array(
             "users" => $users,
         ));

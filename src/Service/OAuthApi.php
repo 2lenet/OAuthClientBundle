@@ -49,8 +49,14 @@ class OAuthApi{
         return $this->url('/api/users/'.$id, 'DELETE');
     }
 
-    public function get($page = 1, $code = null){
-        $users = $this->url("/api/users?pagination=false&page=".$page."&codeClient=".$code."%2F");
+    public function get(array $data = []){
+        $url = '/api/users?';
+        $i = 0;
+        foreach($data as $k => $param){
+            $url.= (($i === 0)?'':'&').$k.'='.$param;
+            $i++;
+        }
+        $users = $this->url($url);
         foreach($users as $user){
             $user->lastConnection = ($user->lastConnection)? new \DateTime($user->lastConnection):null;
         }
