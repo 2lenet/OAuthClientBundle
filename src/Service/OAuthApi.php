@@ -3,6 +3,7 @@
 namespace Lle\OAuthClientBundle\Service;
 
 use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class OAuthApi{
 
@@ -27,6 +28,11 @@ class OAuthApi{
         ]);
         $r = json_decode($response->getBody()->getContents());
         $this->token = $r->token;
+    }
+
+    public function autoCompletion($query, $codeClient = null): JsonResponse{
+        $url = "/api/utils/users?query=".$query.(($codeClient)? '&codeclient='.$codeClient:'');
+        return new JsonResponse($this->url($url, 'POST'));
     }
 
     public function url($url, $method = "GET", $data = null){

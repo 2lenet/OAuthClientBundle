@@ -2,6 +2,7 @@
 
 namespace Lle\OAuthClientBundle\Controller;
 
+use Lle\OAuthClientBundle\Form\EditUserType;
 use Lle\OAuthClientBundle\Form\UserType;
 use Lle\OAuthClientBundle\Service\OAuthApi;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -63,6 +64,29 @@ class UserAdminController extends Controller
             }else{
                 $this->addFlash('error', $response->error);
             }
+        }
+        return $this->render("@OAuthClient/user_new.html.twig", array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function formEdit(Request $request)
+    {
+
+        /* @var \App\Security\Authentication\Entity\User $user */
+        $user = $this->getUser();
+        $data = [
+            'lastname' => $user->getPrenom(),
+            'firstname' => $user->getNom(),
+            'email' => $user->getEmail()
+        ];
+
+        $form = $this->createForm(EditUserType::class, $data);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() and $form->isValid()){
+            $this->api->put($user->getId(),$form->getData());
+            $this->addFlash('success', 'Utilisateur modifié');
         }
         return $this->render("@OAuthClient/user_new.html.twig", array(
             'form' => $form->createView(),

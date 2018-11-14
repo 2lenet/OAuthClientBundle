@@ -29,6 +29,10 @@ admin_user_delete:
     path: /admin/user/delete/{id}
     controller: Lle\OAuthClientBundle\Controller\UserAdminController::delete
 
+admin_user_form_edit:
+    path: /admin/user/form/edit
+    controller: Lle\OAuthClientBundle\Controller\UserAdminController::formEdit
+
 admin_user_new:
     path: /admin/user/new
     controller: Lle\OAuthClientBundle\Controller\UserAdminController::new
