@@ -110,6 +110,11 @@ class LleResourceOwner implements ResourceOwnerInterface
          return $this->get('a2f_activated');
      }
 
+     public function getMobile()
+     {
+         return $this->get('mobile');
+     }
+
     /**
      * Return all of the owner details available as an array.
      *

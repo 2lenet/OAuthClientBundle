@@ -78,6 +78,10 @@ class OAuthApi{
         return $this->url('/api/users/'.$id, 'PUT', $data);
     }
 
+    public function putPassword($id, $password){
+        return $this->url('/api/utils/pass/'.$id, 'PUT', ['pass' => $password, 'hash' => md5($id.$password)]);
+    }
+
     public function post($data){
         return $this->url('/api/utils/users/add', 'POST', $data);
     }

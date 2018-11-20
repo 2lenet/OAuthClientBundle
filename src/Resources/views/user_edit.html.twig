@@ -1,0 +1,20 @@
+{% extends  "base.html.twig" %}
+
+{% block page_title %}Dashboard{% endblock %}
+{% block content_title %} {{ 'title.user.admin_edit'|trans }} {%  endblock %}
+{% block main %}
+    <style>
+        #form_roles label{
+            padding-right:5px;
+        }
+    </style>
+    {% block entity_form %}
+        <section id="main" class="content">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </section>
+    {%  endblock %}
+
+{% endblock %}
+

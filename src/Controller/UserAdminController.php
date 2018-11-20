@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -78,17 +79,23 @@ class UserAdminController extends Controller
         $data = [
             'lastname' => $user->getPrenom(),
             'firstname' => $user->getNom(),
-            'email' => $user->getEmail()
+            'email' => $user->getEmail(),
+            'mobile'=> $user->getMobile(),
         ];
+
 
         $form = $this->createForm(EditUserType::class, $data);
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()){
             $this->api->put($user->getId(),$form->getData());
+            if($form->getData()['password']) {
+                $this->api->putPassword($user->getId(), $form->getData()['password']);
+            }
+            $user->syncWith($form->getData());
             $this->addFlash('success', 'Utilisateur modifié');
         }
-        return $this->render("@OAuthClient/user_new.html.twig", array(
+        return $this->render("@OAuthClient/user_edit.html.twig", array(
             'form' => $form->createView(),
         ));
     }
