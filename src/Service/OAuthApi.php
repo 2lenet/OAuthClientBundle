@@ -30,8 +30,9 @@ class OAuthApi{
         $this->token = $r->token;
     }
 
-    public function autoCompletion($query, $codeClient = null): JsonResponse{
+    public function autoCompletion($query, $codeClient = null, $page = null): JsonResponse{
         $url = "/api/utils/users?query=".$query.(($codeClient)? '&codeclient='.$codeClient:'');
+        if($page) $url.= '&page='.$page;
         return new JsonResponse($this->url($url, 'POST'));
     }
 
@@ -69,6 +70,10 @@ class OAuthApi{
         return $users;
     }
 
+    public function find($id){
+        return $this->get(['id'=>$id])[0];
+    }
+
     public function put($id, $data){
         foreach($data as $k => $v){
             if($k === 'isActive'){
@@ -84,6 +89,10 @@ class OAuthApi{
 
     public function post($data){
         return $this->url('/api/utils/users/add', 'POST', $data);
+    }
+
+    public function update($id, $data){
+        return $this->url('/api/utils/users/edit/'.$id, 'POST', $data);
     }
 
     public function getRoles(){

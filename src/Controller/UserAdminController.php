@@ -38,6 +38,26 @@ class UserAdminController extends Controller
 
     public function edit(Request $request, $id)
     {
+        /* @TODO test */
+        $user = $this->api->find($id);
+        $user->password = null;
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if($form->isSubmitted() and $form->isValid()){
+            $response = $this->api->update($id, (array)$form->getData());
+            if($response->status === 'ok'){
+                $this->addFlash('success', 'Utilisateur modifié');
+            }else{
+                $this->addFlash('error', $response->error);
+            }
+        }
+        return $this->render("@OAuthClient/user_edit.html.twig", array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function put(Request $request, $id)
+    {
         $this->addFlash('success', 'Utilisateur modifié');
         $this->api->put($id, $request->query->all());
         return $this->redirectToRoute('admin_user');
@@ -70,6 +90,7 @@ class UserAdminController extends Controller
             'form' => $form->createView(),
         ));
     }
+
 
     public function formEdit(Request $request)
     {

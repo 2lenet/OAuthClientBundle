@@ -43,9 +43,9 @@
         <td>{{user.username}}</td>
         <td>
             {% if user.isActive %}
-                <a href="{{ path('admin_user_edit', {'isActive':false, 'id': user.id}) }}" class="label label-success">Oui</a>
+                <a href="{{ path('admin_user_put', {'isActive':false, 'id': user.id}) }}" class="label label-success">Oui</a>
             {%  else %}
-                <a href="{{ path('admin_user_edit', {'isActive':true, 'id': user.id}) }}" class="label label-danger">Non</a>
+                <a href="{{ path('admin_user_put', {'isActive':true, 'id': user.id}) }}" class="label label-danger">Non</a>
             {%  endif %}
         </td>
         <td>{{user.lastname}}</td>
@@ -53,9 +53,12 @@
         <td>{%  if user.lastConnection %}{{ user.lastConnection|date('d/m/Y h:i') }}{%  endif %}</td>
         <td>{{user.email}}</td>
         <td>{{ user.roles|join(' ')[0:70] }}...</td>
-        <td>{{ user.codeClient|split('/')[1] |service_name }}</td>
-        <td><a onclick="return confirm('Voulez vous vraiment supprimer cette utilisateur ?');" href="{{ path('admin_user_delete', {'id': user.id}) }}" style="color:#fff;" class=" text-danger action-delete btn btn-danger">
+        <td>{%  if user.codeClient %}{{ user.codeClient|split('/')[1] |service_name }}{%  endif %}</td>
+        <td>
+            <a onclick="return confirm('Voulez vous vraiment supprimer cette utilisateur ?');" href="{{ path('admin_user_delete', {'id': user.id}) }}" style="color:#fff;" class=" text-danger action-delete btn btn-danger">
                 <i class="fa fa-trash"></i>&nbsp;Supprimer</a>
+            <a href="{{ path('admin_user_edit', {'id': user.id}) }}" style="color:#fff;" class="btn btn-success">
+                <i class="fa fa-pencil"></i>&nbsp;Editer</a>
         </td>
     </tr>
     {% endfor %}
