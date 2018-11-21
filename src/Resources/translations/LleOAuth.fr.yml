@@ -1,0 +1,24 @@
+title.list: Liste d'utilisateur
+title.edit: Editer un utilisateur
+title.new: Ajouter un utilisateur
+label.true: Oui
+label.false: Non
+action.new: Nouveau
+action.edit: Editer
+action.delete: Supprimer
+msg.confirm_delete: Voulez vous vraiment supprimer cette utilisateur ?
+label.username: Nom d'utilisateur
+label.actif: Actif
+label.name: Nom
+label.lastname: Prénom
+label.last_con: Dernière connexion
+label.email: Email
+label.roles: Roles
+label.service: Service
+label.actions: Actions
+label.save: Enregistrer
+label.password: Mot de passe
+label.repeat_password: Répéter mot de passe
+flash.edit_success: Utilisateur modifié
+flash.add_success: Utilisateur ajouté
+flash.delete_success: Utilisateur supprimé

@@ -1,7 +1,7 @@
 {% extends  "base.html.twig" %}
-
-{% block page_title %}Dashboard{% endblock %}
-{% block content_title %} {{ 'title.user.admin_new'|trans }} {%  endblock %}
+{% trans_default_domain 'LleOAuth' %}
+{% block page_title %}{{ 'title.list'|trans }}{% endblock %}
+{% block content_title %} {{ 'title.list'|trans }} {%  endblock %}
 {% block main %}
     {{ parent() }}
 <section>
@@ -12,7 +12,7 @@
                     <div class="button-action">
                     <a class="btn btn-primary" style="margin-right:5px;" href="{{path('admin_user_new')}}">
                         <i class="fa fa-download"></i>
-                            Nouveau 
+                            {{ 'action.new'|trans }}
                     </a>
                     </div>
 
@@ -27,15 +27,15 @@
 <div class="table-responsive">
 <table class="table treetable">
     <tr>
-        <th>Username</th>
-        <th>Actif</th>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Dernière connexion</th>
-        <th>Email</th>
-        <th>Roles</th>
-        <th>Service</th>
-        <th>Actions</th>
+        <th>{{ 'label.username'|trans }}</th>
+        <th>{{ 'label.actif'|trans }}</th>
+        <th>{{ 'label.name'|trans }}</th>
+        <th>{{ 'label.lastname'|trans }}</th>
+        <th>{{ 'label.last_con'|trans }}</th>
+        <th>{{ 'label.email'|trans }}</th>
+        <th>{{ 'label.roles'|trans }}</th>
+        <th>{{ 'label.service'|trans }}</th>
+        <th>{{ 'label.actions'|trans }}</th>
     </tr>
 
     {% for user in users %}
@@ -43,10 +43,10 @@
         <td>{{user.username}}</td>
         <td>
             {% if user.isActive %}
-                <a href="{{ path('admin_user_put', {'isActive':false, 'id': user.id}) }}" class="label label-success">Oui</a>
+                <a href="{{ path('admin_user_put', {'isActive':false, 'id': user.id}) }}" class="label label-success">{{ 'label.true'|trans }}</a>
             {%  else %}
-                <a href="{{ path('admin_user_put', {'isActive':true, 'id': user.id}) }}" class="label label-danger">Non</a>
-            {%  endif %}
+                <a href="{{ path('admin_user_put', {'isActive':true, 'id': user.id}) }}" class="label label-danger">{{ 'label.false'|trans }}</a>
+            {% endif %}
         </td>
         <td>{{user.lastname}}</td>
         <td>{{user.firstname}}</td>
@@ -55,10 +55,10 @@
         <td>{{ user.roles|join(' ')[0:70] }}...</td>
         <td>{%  if user.codeClient %}{{ user.codeClient|split('/')[1] |service_name }}{%  endif %}</td>
         <td>
-            <a onclick="return confirm('Voulez vous vraiment supprimer cette utilisateur ?');" href="{{ path('admin_user_delete', {'id': user.id}) }}" style="color:#fff;" class=" text-danger action-delete btn btn-danger">
-                <i class="fa fa-trash"></i>&nbsp;Supprimer</a>
+            <a onclick="return confirm('{{ 'msg.confirm_delete'|trans }}');" href="{{ path('admin_user_delete', {'id': user.id}) }}" style="color:#fff;" class=" text-danger action-delete btn btn-danger">
+                <i class="fa fa-trash"></i>&nbsp;{{ 'action.delete'|trans }}</a>
             <a href="{{ path('admin_user_edit', {'id': user.id}) }}" style="color:#fff;" class="btn btn-success">
-                <i class="fa fa-pencil"></i>&nbsp;Editer</a>
+                <i class="fa fa-pencil"></i>&nbsp;{{ 'action.edit'|trans }}</a>
         </td>
     </tr>
     {% endfor %}

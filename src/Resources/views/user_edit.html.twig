@@ -1,7 +1,7 @@
 {% extends  "base.html.twig" %}
-
-{% block page_title %}Dashboard{% endblock %}
-{% block content_title %} {{ 'title.user.admin_edit'|trans }} {%  endblock %}
+{% trans_default_domain 'LleOAuth' %}
+{% block page_title %}{{ 'title.edit'|trans }}{% endblock %}
+{% block content_title %} {{ 'title.edit'|trans }} {%  endblock %}
 {% block main %}
     <style>
         #form_roles label{

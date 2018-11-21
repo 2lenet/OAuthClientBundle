@@ -14,7 +14,7 @@ services:
         arguments: ['%lle.oauth_client.domain%','%lle.oauth_client.default_user%', '%lle.oauth_client.default_password%']
 
     Lle\OAuthClientBundle\Controller\UserAdminController:
-        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi']
+        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi', '@translator']
         tags: ['controller.service_arguments']
 
 

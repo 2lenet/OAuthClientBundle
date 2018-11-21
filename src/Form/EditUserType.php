@@ -18,24 +18,24 @@ class EditUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastname', TextType::class, ['label'=> 'Nom', 'attr' => ['class'=> 'form-control']])
-            ->add('firstname', TextType::class, ['label'=> 'Prenom', 'attr' => ['class'=> 'form-control']])
-            ->add('email', TextType::class, ['attr' => ['class'=> 'form-control']])
-            ->add('mobile', TextType::class, ['required'=>false,'attr' => ['class'=> 'form-control']])
+            ->add('lastname', TextType::class, ['label'=> 'label.name', 'attr' => ['class'=> 'form-control']])
+            ->add('firstname', TextType::class, ['label'=> 'label.lastname', 'attr' => ['class'=> 'form-control']])
+            ->add('email', TextType::class, ['label'=>'label.email','attr' => ['class'=> 'form-control']])
+            ->add('mobile', TextType::class, ['label'=>'label.mobile','required'=>false,'attr' => ['class'=> 'form-control']])
             ->add('password', RepeatedType::class, [
                 'required'=>false,
                 'type'=> PasswordType::class,
-                'first_options' => ['required'=>false,'label' => 'Mot de passe', 'attr' => ['class'=> 'form-control']],
-                'second_options' => ['required'=>false,'label' => 'Répéter mot de passe', 'attr' => ['class'=> 'form-control']]
+                'first_options' => ['required'=>false,'label' => 'label.password', 'attr' => ['class'=> 'form-control']],
+                'second_options' => ['required'=>false,'label' => 'label.repeat_password', 'attr' => ['class'=> 'form-control']]
             ])
-            ->add('save', SubmitType::class, array('label' => 'Enregistrer', 'attr' => ['class'=> 'btn btn-primary']))
+            ->add('save', SubmitType::class, array('label' => 'label.save', 'attr' => ['class'=> 'btn btn-primary']))
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'translation_domain' => 'LleOAuth'
         ]);
     }
 }
