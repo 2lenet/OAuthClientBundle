@@ -5,6 +5,8 @@ namespace Lle\OAuthClientBundle\Provider;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
+use League\OAuth2\Client\Token\AccessTokenInterface;
+
 use Psr\Http\Message\ResponseInterface;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 
@@ -32,7 +34,7 @@ class LleProvider extends AbstractProvider
         return $this->domain . "oauth/v2/token";
     }
 
-    public function getResourceOwnerDetailsUrl(AccessToken $token)
+    public function getResourceOwnerDetailsUrl(AccessTokenInterface $token)
     {
         return $this->domain . 'user-details?token=' . $token->getToken();
     }
@@ -49,7 +51,7 @@ class LleProvider extends AbstractProvider
         }
     }
 
-    protected function createResourceOwner(array $response, AccessToken $token)
+    protected function createResourceOwner(array $response, AccessTokenInterface $token)
     {
         return new LleResourceOwner($response, $token);
     }
