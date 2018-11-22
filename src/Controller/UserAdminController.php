@@ -49,7 +49,7 @@ class UserAdminController extends Controller
         if($form->isSubmitted() and $form->isValid()){
             $response = $this->api->update($id, (array)$form->getData());
             if($response->status === 'ok'){
-                $this->addFlash('success', $this->trans->trans('flash.edit_success', null, 'LleOAuth'));
+                $this->addFlash('success', $this->trans->trans('flash.edit_success', [], 'LleOAuth'));
             }else{
                 $this->addFlash('error', $response->error);
             }
@@ -61,14 +61,14 @@ class UserAdminController extends Controller
 
     public function put(Request $request, $id)
     {
-        $this->addFlash('success', $this->trans->trans('flash.edit_success', null, 'LleOAuth'));
+        $this->addFlash('success', $this->trans->trans('flash.edit_success', [], 'LleOAuth'));
         $this->api->put($id, $request->query->all());
         return $this->redirectToRoute('admin_user');
     }
 
     public function delete(Request $request, $id)
     {
-        $this->addFlash('success', $this->trans->trans('flash.delete_success', null, 'LleOAuth'));
+        $this->addFlash('success', $this->trans->trans('flash.delete_success', [], 'LleOAuth'));
         $this->api->delete($id);
         return $this->redirectToRoute('admin_user');
     }
@@ -84,7 +84,7 @@ class UserAdminController extends Controller
         if($form->isSubmitted() and $form->isValid()){
             $response = $this->api->post(array_merge($form->getData(), ['codeClient'=> $user->getCodeClient()]));
             if($response->status === 'ok'){
-                $this->addFlash('success', $this->trans->trans('flash.add_success', null, 'LleOAuth'));
+                $this->addFlash('success', $this->trans->trans('flash.add_success', [], 'LleOAuth'));
             }else{
                 $this->addFlash('error', $response->error);
             }
@@ -117,7 +117,7 @@ class UserAdminController extends Controller
                 $this->api->putPassword($user->getId(), $form->getData()['password']);
             }
             $user->syncWith($form->getData());
-            $this->addFlash('success', $this->trans->trans('flash.edit_success', null, 'LleOAuth'));
+            $this->addFlash('success', $this->trans->trans('flash.edit_success', [], 'LleOAuth'));
         }
         return $this->render("@OAuthClient/user_edit.html.twig", array(
             'form' => $form->createView(),
