@@ -29,7 +29,7 @@
     <tr>
         <th>{{ 'label.username'|trans }}</th>
         <th>{{ 'label.actif'|trans }}</th>
-        <th>{{ 'label.name'|trans }}</th>
+        <th>{{ 'label.firstname'|trans }}</th>
         <th>{{ 'label.lastname'|trans }}</th>
         <th>{{ 'label.last_con'|trans }}</th>
         <th>{{ 'label.email'|trans }}</th>
@@ -48,8 +48,8 @@
                 <a href="{{ path('admin_user_put', {'isActive':true, 'id': user.id}) }}" class="label label-danger">{{ 'label.false'|trans }}</a>
             {% endif %}
         </td>
-        <td>{{user.lastname}}</td>
         <td>{{user.firstname}}</td>
+        <td>{{user.lastname}}</td>
         <td>{%  if user.lastConnection %}{{ user.lastConnection|date('d/m/Y h:i') }}{%  endif %}</td>
         <td>{{user.email}}</td>
         <td>{{ user.roles|join(' ')[0:70] }}...</td>
