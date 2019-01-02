@@ -101,8 +101,8 @@ class UserAdminController extends Controller
         /* @var \App\Security\Authentication\Entity\User $user */
         $user = $this->getUser();
         $data = [
-            'lastname' => $user->getPrenom(),
-            'firstname' => $user->getNom(),
+            'firstname' => $user->getPrenom(),
+            'lastname' => $user->getNom(),
             'email' => $user->getEmail(),
             'mobile'=> $user->getMobile(),
         ];

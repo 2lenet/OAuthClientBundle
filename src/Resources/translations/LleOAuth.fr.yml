@@ -9,8 +9,8 @@ action.delete: Supprimer
 msg.confirm_delete: Voulez vous vraiment supprimer cette utilisateur ?
 label.username: Nom d'utilisateur
 label.actif: Actif
-label.name: Nom
-label.lastname: Prénom
+label.firstname: Prénom
+label.lastname: Nom
 label.last_con: Dernière connexion
 label.email: Email
 label.roles: Roles
