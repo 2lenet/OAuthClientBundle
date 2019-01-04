@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace Lle\OAuthClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace Lle\OAuthClientBundle\Repository;
 
-use App\Entity\User;
+use Lle\OAuthClientBundle\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
