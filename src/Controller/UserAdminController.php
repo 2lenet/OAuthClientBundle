@@ -98,7 +98,7 @@ class UserAdminController extends Controller
     public function formEdit(Request $request)
     {
 
-        /* @var \App\Security\Authentication\Entity\User $user */
+        /* @var \App\Entity\User $user */
         $user = $this->getUser();
         $data = [
             'firstname' => $user->getPrenom(),
@@ -112,7 +112,7 @@ class UserAdminController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()){
-            $this->api->put($user->getId(),$form->getData());
+            $this->api->put($user->getConnectId(),$form->getData());
             if($form->getData()['password']) {
                 $this->api->putPassword($user->getId(), $form->getData()['password']);
             }
