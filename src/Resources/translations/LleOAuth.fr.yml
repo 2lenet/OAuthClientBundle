@@ -16,6 +16,7 @@ label.email: Email
 label.roles: Roles
 label.service: Service
 label.actions: Actions
+label.mobile: Téléphone portable
 label.save: Enregistrer
 label.password: Mot de passe
 label.repeat_password: Répéter mot de passe
