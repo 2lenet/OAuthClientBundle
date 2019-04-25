@@ -15,9 +15,11 @@ class OAuthApi{
 
     public function url($url, $method = "GET", $data = null){
 
-        $options = ['headers' => [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json'
+        $options = [
+            'auth' => [getenv('OAUTHAPI_USERNAME'), getenv('OAUTHAPI_PASSWORD')],
+            'headers' => [
+              'Accept' => 'application/json',
+              'Content-Type' => 'application/json',
         ]];
         if($data){
             $options['body'] = json_encode($data);
