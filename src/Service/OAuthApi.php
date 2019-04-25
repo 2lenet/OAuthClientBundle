@@ -8,42 +8,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class OAuthApi{
 
     private $guzzle;
-    private $defaultUser;
-    private $defaultPassword;
-    private $token;
 
     public function __construct(string $domain, string $defaultUser, string $defaultPassword){
         $this->guzzle = new Client(['base_uri' => $domain]);
-        $this->defaultPassword = $defaultPassword;
-        $this->defaultUser = $defaultUser;
-    }
-
-    public function login(){
-        $response = $this->guzzle->request('POST', "/api/login_check",[
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-            'body' => json_encode(["username" => $this->defaultUser ,"password"=> $this->defaultPassword])
-        ]);
-        $r = json_decode($response->getBody()->getContents());
-        $this->token = $r->token;
-    }
-
-    public function autoCompletion($query, $codeClient = null, $page = null): JsonResponse{
-        $url = "/api/utils/users?query=".$query.(($codeClient)? '&codeclient='.$codeClient:'');
-        if($page) $url.= '&page='.$page;
-        return new JsonResponse($this->url($url, 'POST'));
     }
 
     public function url($url, $method = "GET", $data = null){
-        if(!$this->token){
-            $this->login();
-        }
+
         $options = ['headers' => [
             'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'authorization' => 'Bearer '.$this->token
+            'Content-Type' => 'application/json'
         ]];
         if($data){
             $options['body'] = json_encode($data);
@@ -93,17 +67,6 @@ class OAuthApi{
 
     public function update($id, $data){
         return $this->url('/api/utils/users/edit/'.$id, 'POST', $data);
-    }
-
-    public function getRoles(){
-        $data = $this->url('/api/utils/roles');
-        $roles = [];
-        foreach($data as $k => $v){
-            if($k !== 'ROLE_USER') {
-                $roles[str_replace('_', ' ', str_replace('ROLE', '', $k))] = $k;
-            }
-        }
-        return $roles;
     }
 
     public function sendEmail(){
