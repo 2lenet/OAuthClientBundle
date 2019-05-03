@@ -32,6 +32,12 @@ class OAuthApi{
         return $this->url('/api/users/'.$id, 'DELETE');
     }
 
+    public function autoCompletion($query, $codeClient = null, $page = null): JsonResponse{
+        $url = "/api/utils/users?query=".$query.(($codeClient)? '&codeclient='.$codeClient:'');
+        if($page) $url.= '&page='.$page;
+        return new JsonResponse($this->url($url, 'POST'));
+    }
+
     public function get(array $data = []){
         $url = '/api/users?';
         $i = 0;
