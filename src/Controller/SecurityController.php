@@ -21,9 +21,9 @@ class SecurityController extends Controller
         throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
     }
 
-
-    public function logoutOAuth()
-    {
+    public function logoutOAuth() {
+        $tokenStorage = $this->get('security.token_storage');
+        $tokenStorage->setToken();
         return $this->redirect(getenv('DOMAIN') . 'logout');
     }
 }
