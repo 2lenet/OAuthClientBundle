@@ -50,8 +50,10 @@ class OAuthGuardAuthenticator extends SocialAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        // Redirection après connexion
-        return new RedirectResponse($request->getSession()->get("_security.main.target_path") ?? '/');
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            return new RedirectResponse($targetPath);
+	}
+	return new RedirectResponse('/');
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
