@@ -15,9 +15,12 @@ use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 
 use Lle\OAuthClientBundle\Security\User\UserProvider;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class OAuthGuardAuthenticator extends SocialAuthenticator
 {
+    use TargetPathTrait;
+
     private $router;
     private $clientRegistry;
 
@@ -52,8 +55,8 @@ class OAuthGuardAuthenticator extends SocialAuthenticator
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
-	}
-	return new RedirectResponse('/');
+	    }
+	    return new RedirectResponse('/');
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
