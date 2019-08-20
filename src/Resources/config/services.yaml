@@ -17,4 +17,8 @@ services:
         arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi', '@translator']
         tags: ['controller.service_arguments']
 
+    Lle\OAuthClientBundle\Controller\SecurityController:
+        arguments: ['@parameter_bag','@oauth2.registry']
+        tags: ['controller.service_arguments']
+
 

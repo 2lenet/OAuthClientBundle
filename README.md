@@ -68,6 +68,9 @@ knpu_oauth2_client:
             client_id: '%env(CLIENT_ID)%'
             client_secret: '%env(CLIENT_SECRET)%'
             redirect_route: login_check
+
+lle_oauth_client:
+    domain: '%env(DOMAIN)%'
 ```
 
 Add this to `.env` and complete. Domain is the *server* domain. It should end with a slash.

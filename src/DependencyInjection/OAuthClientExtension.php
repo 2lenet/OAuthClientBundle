@@ -13,7 +13,7 @@ class OAuthClientExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->setParameter( 'lle.oauth_client.domain', $config[ 'domain' ] );
+        $container->setParameter( 'lle.oauth_client.domain', $config[ 'domain' ] ?? $config[ 'lle_oauth_domain' ] );
         $container->setParameter( 'lle.oauth_client.default_user', $config[ 'default_user' ] );
         $container->setParameter( 'lle.oauth_client.default_password', $config[ 'default_password' ] );
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));

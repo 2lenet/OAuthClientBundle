@@ -21,7 +21,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('lle_oauth_client');
         $rootNode
             ->children()
-            ->scalarNode('domain')->defaultValue(getenv('DOMAIN'))->end()
+            ->scalarNode('domain')->defaultValue(getenv('DOMAIN'))->setDeprecated()->end()
+            ->scalarNode('lle_oauth_domain')->defaultValue(null)->end()
             ->scalarNode('default_user')->defaultValue('tmpuser')->end()
             ->scalarNode('default_password')->defaultValue('tmppassword')->end();
 
