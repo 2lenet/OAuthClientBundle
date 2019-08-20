@@ -11,7 +11,7 @@ services:
         class: Lle\OAuthClientBundle\Security\Guard\OAuthGuardAuthenticator
 
     Lle\OAuthClientBundle\Service\OAuthApi:
-        arguments: ['%lle.oauth_client.domain%','%lle.oauth_client.default_user%', '%lle.oauth_client.default_password%']
+        arguments: ['%lle.oauth_client.domain%','%env(OAUTHAPI_USERNAME)%', '%env(OAUTHAPI_PASSWORD)%']
 
     Lle\OAuthClientBundle\Controller\UserAdminController:
         arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi', '@translator']

@@ -8,15 +8,18 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class OAuthApi{
 
     private $guzzle;
+    private $username;
+    private $password;
 
-    public function __construct(string $domain, string $defaultUser, string $defaultPassword){
+    public function __construct(string $domain, string $username, string $password){
         $this->guzzle = new Client(['base_uri' => $domain]);
+        $this->username = $username;
+        $this->password = $password;
     }
 
     public function url($url, $method = "GET", $data = null){
-
         $options = [
-            'auth' => [getenv('OAUTHAPI_USERNAME'), getenv('OAUTHAPI_PASSWORD')],
+            'auth' => [$this->username, $this->password],
             'headers' => [
               'Accept' => 'application/json',
               'Content-Type' => 'application/json',
