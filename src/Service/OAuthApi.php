@@ -87,4 +87,35 @@ class OAuthApi{
     public function sendEmail(){
         return $this->url('/api/utils/send', 'POST');
     }
+
+    public function checkUser(string $username, string $password){
+        $options = [
+            'auth' => [$username, $password],
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ]];
+        try {
+            $response = $this->guzzle->request('POST', '/profile', $options);
+        }catch(\Exception $exception){
+            return null;
+        }
+        if($response->getStatusCode() === 200){
+            return $this->get(['username'=>$username])[0]->id;
+        }else{
+            return null;
+        }
+    }
+
+    /*public function login(){
+        $response = $this->guzzle->request('POST', "/api/login_check",[
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ],
+            'body' => json_encode(["username" => $this->defaultUser ,"password"=> $this->defaultPassword])
+        ]);
+        $r = json_decode($response->getBody()->getContents());
+        $this->token = $r->token;
+    }*/
 }

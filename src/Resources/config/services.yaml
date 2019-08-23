@@ -10,6 +10,10 @@ services:
     lle_oauth_guard:
         class: Lle\OAuthClientBundle\Security\Guard\OAuthGuardAuthenticator
 
+    lle_oauth_token:
+        class: Lle\OAuthClientBundle\Security\Guard\TokenAuthenticator
+        arguments: ['@doctrine.orm.default_entity_manager', '@parameter_bag']
+
     Lle\OAuthClientBundle\Service\OAuthApi:
         arguments: ['%lle.oauth_client.domain%','%env(OAUTHAPI_USERNAME)%', '%env(OAUTHAPI_PASSWORD)%']
 
@@ -19,6 +23,10 @@ services:
 
     Lle\OAuthClientBundle\Controller\SecurityController:
         arguments: ['@parameter_bag','@oauth2.registry']
+        tags: ['controller.service_arguments']
+
+    Lle\OAuthClientBundle\Controller\JsonSecurityController:
+        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi','@doctrine.orm.default_entity_manager', '@parameter_bag', '@event_dispatcher']
         tags: ['controller.service_arguments']
 
 

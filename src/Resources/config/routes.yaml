@@ -8,6 +8,21 @@ login_check:
     defaults:
         _controller: Lle\OAuthClientBundle\Controller\SecurityController::loginCheck
 
+login_json:
+    path: /login_json
+    defaults:
+        _controller: Lle\OAuthClientBundle\Controller\JsonSecurityController::jsonLogin
+
+logout_json:
+    path: /logout_json
+    defaults:
+        _controller: Lle\OAuthClientBundle\Controller\JsonSecurityController::jsonLogout
+
+user_json:
+    path: /user_json
+    defaults:
+        _controller: Lle\OAuthClientBundle\Controller\JsonSecurityController::jsonUser
+
 logout_oauth:
     path: /logout_oauth
     defaults:

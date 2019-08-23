@@ -2,6 +2,7 @@
 
 namespace Lle\OAuthClientBundle\DependencyInjection;
 
+use App\Entity\User;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -24,7 +25,13 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('domain')->defaultValue(getenv('DOMAIN'))->setDeprecated()->end()
             ->scalarNode('lle_oauth_domain')->defaultValue(null)->end()
             ->scalarNode('default_user')->defaultValue('tmpuser')->end()
-            ->scalarNode('default_password')->defaultValue('tmppassword')->end();
+            ->scalarNode('default_password')->defaultValue('tmppassword')->end()
+            ->scalarNode('class_user')->defaultValue('App\Entity\User')->end()
+            ->scalarNode('token_name')->defaultValue('token')->end()
+            ->scalarNode('header_token_name')->defaultValue('Authorization')->end()
+            ->scalarNode('token_type')->defaultValue(null)->end()
+            ->scalarNode('key_field')->defaultValue('idConnect')->end()
+            ->scalarNode('token_name_field')->defaultValue('token')->end();
 
         return $treeBuilder;
     }

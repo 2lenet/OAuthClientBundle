@@ -32,6 +32,8 @@ security:
             guard:
                 authenticators:
                     - lle_oauth_guard
+                    - lle_oauth_token
+                entry_point: lle_oauth_token
 
     access_control:
     - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -71,7 +73,22 @@ knpu_oauth2_client:
 
 lle_oauth_client:
     domain: '%env(DOMAIN)%'
+    class_user: 'App\Entity\User'
+    header_token_name: 'Authorization' #header du token
+    token_name: 'token' #nom du token (json)
+    token_name_field: 'token' #nom du champ token de l'user
+    key_field: 'idConnect' #nom du champ key de l'user
+    token_type: ~ #type ou prefix du token (permet d'affiné Authenticator)
 ```
+
+## TOKEN LOGIN WITH jSON
+
+use the config header_token_name, token_name, token_name_field, key_field and token_type,
+but the default value is ok.
+However you have to implements Lle\OAuthClientBundle\Model\UserTokenInterface in your user class !
+
+
+## env
 
 Add this to `.env` and complete. Domain is the *server* domain. It should end with a slash.
 
@@ -80,6 +97,8 @@ Add this to `.env` and complete. Domain is the *server* domain. It should end wi
 CLIENT_ID=
 CLIENT_SECRET=
 DOMAIN=
+OAUTHAPI_PASSWORD=
+OAUTHAPI_USERNAME=
 ###< 2lenet/OAuthClientBundle ###
 
 ```
