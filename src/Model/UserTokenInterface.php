@@ -18,6 +18,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 interface UserTokenInterface
 {
     public function generateToken();
-    public function getToken():string;
+    public function getToken():?string;
 
 }
