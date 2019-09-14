@@ -38,7 +38,7 @@ class LleProvider extends AbstractProvider
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->domain . 'user-details?token=' . $token->getToken();
+        return $this->apiconnect . 'user-details?token=' . $token->getToken();
     }
 
     protected function getDefaultScopes()
