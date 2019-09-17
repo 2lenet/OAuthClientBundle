@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonSecurityController extends AbstractController
 {
@@ -24,17 +25,20 @@ class JsonSecurityController extends AbstractController
     private $keyField;
     private $tokenName;
     private $eventDispatcher;
+    private $serializer;
 
     public function __construct(
         OAuthApi $api,
         EntityManagerInterface $em,
         ParameterBagInterface $parameterBag,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        SerializerInterface $serializer
     )
     {
         $this->api = $api;
         $this->em = $em;
         $this->eventDispatcher = $eventDispatcher;
+        $this->serializer = $serializer;
         $this->classUser = $parameterBag->get('lle.oauth_client.class_user');
         $this->keyField= $parameterBag->get('lle.oauth_client.key_field');
         $this->tokenName = $parameterBag->get('lle.oauth_client.token_name');
@@ -59,17 +63,23 @@ class JsonSecurityController extends AbstractController
                 throw new AccessDeniedException();
             }
         }
+        throw new AccessDeniedException();
     }
 
     public function jsonLogout(Request $request){
         return new JsonResponse(['status'=>'ok']);
     }
     
-    public function jsonUser(Request $request){ //@Todo use serializer
+    public function jsonUser(Request $request){
+        $response = new JsonResponse();
         if(method_exists($this->getUser(), 'toArray')){
             $json = $this->getUser()->toArray();
         }else{
-            $json = ['username'=>$this->getUser()->getUsername()];
+            $json = json_decode($this->serializer->serialize($this->getUser(),'json', [
+                'circular_reference_handler' => function ($object) {
+                    return $object->getId();
+                }
+            ]));
         }
         return new JsonResponse(['user'=>$json]);
     }
