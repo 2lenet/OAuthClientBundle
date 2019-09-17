@@ -16,10 +16,13 @@ class LleProvider extends AbstractProvider
     use BearerAuthorizationTrait;
 
     public $domain;
+    public $apiconnect;
 
     public function __construct(array $options, array $collaborators = [])
     {
         $this->domain = $options['domain'];
+        $this->apiconnect = $options['apiconnect'] ?? $this->domain;
+
         parent::__construct($options, $collaborators);
     }
 
@@ -30,12 +33,12 @@ class LleProvider extends AbstractProvider
 
     public function getBaseAccessTokenUrl(array $params = [])
     {
-        return $this->domain . "oauth/v2/token";
+        return $this->apiconnect . "oauth/v2/token";
     }
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->domain . 'user-details?token=' . $token->getToken();
+        return $this->apiconnect . 'user-details?token=' . $token->getToken();
     }
 
     protected function getDefaultScopes()
