@@ -15,7 +15,7 @@ services:
         arguments: ['@doctrine.orm.default_entity_manager', '@parameter_bag']
 
     Lle\OAuthClientBundle\Service\OAuthApi:
-        arguments: ['%lle.oauth_client.domain%','%env(OAUTHAPI_USERNAME)%', '%env(OAUTHAPI_PASSWORD)%']
+        arguments: ['%lle.oauth_client.apiconnect%','%env(OAUTHAPI_USERNAME)%', '%env(OAUTHAPI_PASSWORD)%']
 
     Lle\OAuthClientBundle\Controller\UserAdminController:
         arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi', '@translator']
