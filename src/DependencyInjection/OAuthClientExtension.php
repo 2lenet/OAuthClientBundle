@@ -14,6 +14,7 @@ class OAuthClientExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter( 'lle.oauth_client.domain', $config[ 'domain' ] ?? $config[ 'lle_oauth_domain' ] );
+        $container->setParameter( 'lle.oauth_client.apiconnect', $config[ 'apiconnect' ] ?? $config[ 'lle_oauth_apiconnect' ] );
         $container->setParameter( 'lle.oauth_client.default_user', $config[ 'default_user' ] );
         $container->setParameter( 'lle.oauth_client.default_password', $config[ 'default_password' ] );
         $container->setParameter( 'lle.oauth_client.class_user', $config[ 'class_user' ] );
