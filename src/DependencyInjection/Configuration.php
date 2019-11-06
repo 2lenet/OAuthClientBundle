@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('domain')->defaultValue(getenv('DOMAIN'))->setDeprecated()->end()
+            ->scalarNode('apiconnect')->defaultValue(getenv('APICONNECT'))->setDeprecated()->end()
             ->scalarNode('lle_oauth_domain')->defaultValue(null)->end()
             ->scalarNode('default_user')->defaultValue('tmpuser')->end()
             ->scalarNode('default_password')->defaultValue('tmppassword')->end()
