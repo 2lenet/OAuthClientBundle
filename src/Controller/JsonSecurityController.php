@@ -4,16 +4,13 @@ namespace Lle\OAuthClientBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Lle\OAuthClientBundle\Model\UserTokenInterface;
 use Lle\OAuthClientBundle\OAuthEvent;
-use Lle\OAuthClientBundle\Repository\UserRepository;
 use Lle\OAuthClientBundle\Service\OAuthApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Serializer\SerializerInterface;
 

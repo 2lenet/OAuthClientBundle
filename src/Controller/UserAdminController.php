@@ -5,7 +5,7 @@ namespace Lle\OAuthClientBundle\Controller;
 use Lle\OAuthClientBundle\Form\EditUserType;
 use Lle\OAuthClientBundle\Form\UserType;
 use Lle\OAuthClientBundle\Service\OAuthApi;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Translation\TranslatorInterface;
 
 
-class UserAdminController extends Controller
+class UserAdminController extends AbstractController
 {
 
     private $api;

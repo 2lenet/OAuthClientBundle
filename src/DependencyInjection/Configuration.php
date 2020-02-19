@@ -18,8 +18,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('lle_oauth_client');
+        $treeBuilder = new TreeBuilder('lle_oauth_client');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
             ->scalarNode('domain')->defaultValue(getenv('DOMAIN'))->setDeprecated()->end()
