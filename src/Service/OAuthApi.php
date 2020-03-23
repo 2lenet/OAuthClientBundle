@@ -11,8 +11,8 @@ class OAuthApi{
     private $username;
     private $password;
 
-    public function __construct(string $domain, string $username, string $password){
-        $this->guzzle = new Client(['base_uri' => $domain]);
+    public function __construct(string $apiconnect, string $username, string $password){
+        $this->guzzle = new Client(['base_uri' => $apiconnect]);
         $this->username = $username;
         $this->password = $password;
     }
@@ -107,15 +107,4 @@ class OAuthApi{
         }
     }
 
-    /*public function login(){
-        $response = $this->guzzle->request('POST', "/api/login_check",[
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-            'body' => json_encode(["username" => $this->defaultUser ,"password"=> $this->defaultPassword])
-        ]);
-        $r = json_decode($response->getBody()->getContents());
-        $this->token = $r->token;
-    }*/
 }

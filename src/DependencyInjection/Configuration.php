@@ -22,9 +22,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
-            ->scalarNode('domain')->defaultValue(getenv('DOMAIN'))->setDeprecated()->end()
-            ->scalarNode('apiconnect')->defaultValue(getenv('APICONNECT'))->setDeprecated()->end()
-            ->scalarNode('lle_oauth_domain')->defaultValue(null)->end()
+	    ->scalarNode('domain')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('apiconnect')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('default_user')->defaultValue('tmpuser')->end()
             ->scalarNode('default_password')->defaultValue('tmppassword')->end()
             ->scalarNode('class_user')->defaultValue('App\Entity\User')->end()
