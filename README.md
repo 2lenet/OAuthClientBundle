@@ -65,7 +65,7 @@ knpu_oauth2_client:
             type: generic
 
             provider_class: Lle\OAuthClientBundle\Provider\LleProvider
-            provider_options: {domain: '%env(DOMAIN)%'}
+            provider_options: {domain: '%env(DOMAIN)%', apiconnect: '%env(APICONNECT)%'}
 
             client_id: '%env(CLIENT_ID)%'
             client_secret: '%env(CLIENT_SECRET)%'
@@ -73,6 +73,7 @@ knpu_oauth2_client:
 
 lle_oauth_client:
     domain: '%env(DOMAIN)%'
+    apiconnect: '%env(APICONNECT)%'
     class_user: 'App\Entity\User'
     header_token_name: 'Authorization' #header du token
     token_name: 'token' #nom du token (json)
