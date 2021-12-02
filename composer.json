@@ -4,8 +4,8 @@
     "description": "The 2LE's OAuth Client Bundle.",
     "license": "MIT",
     "require": {
-	      "php": ">=7.2",
-          "knpuniversity/oauth2-client-bundle": "^1.19",
+	  "php": ">=7.2",
+          "knpuniversity/oauth2-client-bundle": "^2.9",
           "guzzlehttp/guzzle": "~6.0"
     },
     "autoload": {
