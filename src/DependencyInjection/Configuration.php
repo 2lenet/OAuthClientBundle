@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
-	    ->scalarNode('domain')->isRequired()->cannotBeEmpty()->end()
+	        ->scalarNode('domain')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('apiconnect')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('default_user')->defaultValue('tmpuser')->end()
             ->scalarNode('default_password')->defaultValue('tmppassword')->end()

@@ -28,7 +28,7 @@ class OAuthClientExtension extends Extension
         $loader->load('form.yaml');
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'lle_oauth_client';
     }
