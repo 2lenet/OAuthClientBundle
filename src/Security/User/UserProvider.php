@@ -26,7 +26,7 @@ class UserProvider implements UserProviderInterface
     /**
      * @deprecated
      */
-    public function loadUserByUsername(string $username)
+    public function loadUserByUsername($username)
     {
         return $this->loadUserByIdentifier($username);
     }
