@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 
-use Lle\OAuthClientBundle\Security\User\User;
 use Lle\OAuthClientBundle\Provider\LleResourceOwner;
 
 class UserProvider implements UserProviderInterface
@@ -24,9 +23,17 @@ class UserProvider implements UserProviderInterface
         $this->clientRegistry = $clientRegistry;
     }
 
+    /**
+     * @deprecated
+     */
     public function loadUserByUsername($username)
     {
-        return new User($username);
+        return $this->loadUserByIdentifier($username);
+    }
+
+    public function loadUserByIdentifier(string $identifier): UserInterface
+    {
+        return new User($identifier);
     }
 
     /**
