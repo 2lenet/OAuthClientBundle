@@ -17,12 +17,15 @@ services:
     Lle\OAuthClientBundle\Service\OAuthApi:
         arguments: ['%lle.oauth_client.apiconnect%','%env(OAUTHAPI_USERNAME)%', '%env(OAUTHAPI_PASSWORD)%']
 
+    Lle\OAuthClientBundle\Service\OAuth2Service:
+        class: Lle\OAuthClientBundle\Service\OAuth2Service
+
     Lle\OAuthClientBundle\Controller\UserAdminController:
         arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi', '@translator']
         tags: ['controller.service_arguments']
 
     Lle\OAuthClientBundle\Controller\SecurityController:
-        arguments: ['@parameter_bag','@oauth2.registry']
+        arguments: ['@parameter_bag', '@security.token_storage', '@Lle\OAuthClientBundle\Service\OAuth2Service']
         tags: ['controller.service_arguments']
 
     Lle\OAuthClientBundle\Controller\JsonSecurityController:

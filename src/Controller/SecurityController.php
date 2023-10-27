@@ -2,33 +2,24 @@
 
 namespace Lle\OAuthClientBundle\Controller;
 
-use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use Lle\OAuthClientBundle\Service\OAuth2Service;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SecurityController extends AbstractController
 {
-    private ParameterBagInterface $parametersBag;
-
-    private ClientRegistry $oauthRegistry;
-
-    private TokenStorageInterface $tokenStorage;
-
     public function __construct(
-        ParameterBagInterface $parametersBag,
-        ClientRegistry $oauthRegistry,
-        TokenStorageInterface $tokenStorage
-    )
-    {
-        $this->parametersBag = $parametersBag;
-        $this->oauthRegistry = $oauthRegistry;
-        $this->tokenStorage = $tokenStorage;
+        private ParameterBagInterface $parametersBag,
+        private TokenStorageInterface $tokenStorage,
+        private OAuth2Service $auth2Service,
+    ) {
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        return $this->oauthRegistry->getClient('2le_oauth')->redirect();
+        return $this->auth2Service->authorize($request);
     }
 
     public function loginCheck()
