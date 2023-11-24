@@ -5,6 +5,7 @@ namespace Lle\OAuthClientBundle\Service;
 use League\OAuth2\Client\Provider\GenericProvider;
 use Lle\OAuthClientBundle\Exception\OAuth2Exception;
 use Lle\OAuthClientBundle\Provider\LleProvider;
+use Lle\OAuthClientBundle\Provider\LleResourceOwner;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,17 +17,6 @@ class OAuth2Service
         private ParameterBagInterface $parameters,
         private UrlGeneratorInterface $urlGenerator,
     ) {
-    }
-
-    public function handle(Request $request)
-    {
-            try {
-
-            } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
-
-                // Failed to get the access token or user details.
-                dd($e->getMessage());
-            }
     }
 
     public function check(Request $request): string
@@ -63,16 +53,21 @@ class OAuth2Service
 
         // Using the access token, we may look up details about the
         // resource owner.
-        $resourceOwner = $provider->getResourceOwner($accessToken);
-dd($resourceOwner);
-        var_export($resourceOwner->toArray());
+        return new LleResourceOwner($provider->getResourceOwner($accessToken)->toArray());
+    }
 
+    public function getAuthenticatedRequest($path)
+    {
+        // J'ai copié cet exemple de la doc, à voir s'il est exploitable.
+        // (permet apparemment d'appeler connect avec son token, utile pour une API yay)
         // The provider provides a way to get an authenticated API request for
         // the service, using the access token; it returns an object conforming
         // to Psr\Http\Message\RequestInterface.
+        $api = $this->parameters->get('lle.oauth_client.apiconnect');
+
         $request = $provider->getAuthenticatedRequest(
             'GET',
-            'https://service.example.com/resource',
+            $api . $path,
             $accessToken
         );
     }
