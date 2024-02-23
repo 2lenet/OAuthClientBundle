@@ -10,18 +10,14 @@ class LleResourceOwner implements ResourceOwnerInterface
     /** @var array */
     private $data;
 
-    /** @var AccessToken */
-    private $token;
-
     /**
      * Creates a new resource owner.
      *
      * @param array $response
      */
-    public function __construct(array $response, AccessToken $token)
+    public function __construct(array $response)
     {
         $this->data = $response;
-        $this->token = $token;
     }
     /**
      * Returns the identifier of the authorized resource owner.
@@ -81,14 +77,6 @@ class LleResourceOwner implements ResourceOwnerInterface
     public function getEmail()
     {
         return $this->get('email');
-    }
-
-    /**
-     * @return AccessToken
-     */
-    public function getToken()
-    {
-        return $this->token;
     }
 
     /**
