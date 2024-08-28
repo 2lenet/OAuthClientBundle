@@ -8,5 +8,5 @@ OAuth client bundle for 2le.
 
 ## Configuration
 
-OAuthClientBundle is an internal tool; please view the [internal documentation for Connect, "Mise en place Client OAuth2"](https://git.2le.net/2le/connect/-/blob/master/doc/client.md)
+OAuthClientBundle is an internal tool; please view the [internal documentation for 2le's Connect](https://git.2le.net/2le/connect/-/blob/master/doc/client.md)
 
