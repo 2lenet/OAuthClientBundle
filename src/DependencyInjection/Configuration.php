@@ -22,13 +22,19 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
+
+            // Client
 	        ->scalarNode('domain')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('apiconnect')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('client_secret')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('redirect_route')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('default_user')->defaultValue('tmpuser')->end()
-            ->scalarNode('default_password')->defaultValue('tmppassword')->end()
+
+            // API
+            ->scalarNode('api_user')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode('api_password')->isRequired()->cannotBeEmpty()->end()
+
+            // JSON login
             ->scalarNode('class_user')->defaultValue('App\Entity\User')->end()
             ->scalarNode('token_name')->defaultValue('token')->end()
             ->scalarNode('header_token_name')->defaultValue('Authorization')->end()
