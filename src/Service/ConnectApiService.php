@@ -12,33 +12,23 @@ class ConnectApiService
     ) {
     }
 
-    public function get(int $id): UserDto
+    public function get(int $id): array
     {
-        $result = $this->client->call('/api/users/' . $id, 'GET');
+        return $this->client->call('/api/users/' . $id, 'GET');
+    }
 
-        $dto = UserDto::new()
-            ->setConnectId($result['connectId'])
-            ->setUsername($result['username'])
-            ->setLastName($result['lastName'])
-            ->setFirstName($result['firstName'])
-            ->setEmail($result['email'])
-            ->setMobilePhone($result['mobilePhone'])
-            ->setA2fActivated($result['a2fActivated'])
-            ->setA2fProvider($result['a2fProvider'])
-            ->setRoles($result['roles'])
-            ->setIsActive($result['isActive'])
-            ->setCodeClient($result['codeClient'])
-            ->setData($result['data'])
-            ->setAutoRedirectUrl($result['autoRedirectUrl'])
-            ->setLocale($result['locale']);
+    public function new(array $payload): array
+    {
+        return $this->client->call('/api/users', 'POST', $payload);
+    }
 
-        $profiles = [];
-        foreach ($result['profiles'] as $profile) {
-            $profiles[] = ProfileDto::new()
-                ->setName($profile['name']);
-        }
-        $dto->setProfiles($profiles);
+    public function edit(array $payload): array
+    {
+        return $this->client->call('/api/users', 'PUT', $payload);
+    }
 
-        return $dto;
+    public function delete(int $id): array
+    {
+        return $this->client->call('/api/users/' . $id, 'DELETE');
     }
 }

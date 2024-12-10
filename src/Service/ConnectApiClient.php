@@ -5,6 +5,7 @@ namespace Lle\OAuthClientBundle\Service;
 use Lle\OAuthClientBundle\Exception\ConnectException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class ConnectApiClient
 {
@@ -20,11 +21,44 @@ class ConnectApiClient
             'json' => $data,
         ]);
 
-        if ($response->getStatusCode() === 404) {
-            throw new ConnectException('Not Found', ConnectException::NOT_FOUND);
-        }
-        
+        $this->checkErrors($response);
+
         return json_decode($response->getContent(false), true);
+    }
+    
+    protected function checkErrors(ResponseInterface $response): void
+    {
+        if ($response->getStatusCode() === 404) {
+            throw new ConnectException('Not found', ConnectException::NOT_FOUND);
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            $errorJson = $response->getContent(false);
+
+            if (json_validate($errorJson)) {
+                $error = json_decode($errorJson, true);
+
+                $code = $error['code'] ?? ConnectException::UNKNOWN_ERROR;
+                $message = $error['message'] ?? 'Unknown error';
+                $data = $error['data'] ?? [];
+
+                $exception = new ConnectException($message, $code);
+                $exception->setData($data);
+
+                throw $exception;
+            } else {
+                $message = 'Unknown error';
+                $hint = strstr($errorJson,"\n",true);
+                if (str_starts_with($hint, '<!--')) {
+                    // Symfony on dev mode prints the exception in the first line
+                    $message .= ' (hint: ' . $hint . ')';
+                }
+                $exception = new ConnectException($message, ConnectException::UNKNOWN_ERROR);
+                $exception->setData(['response' => $errorJson]);
+
+                throw $exception;
+            }
+        }
     }
 
     protected function getClient(): HttpClientInterface
