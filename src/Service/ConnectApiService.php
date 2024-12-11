@@ -36,4 +36,9 @@ class ConnectApiService
     {
         return $this->client->call('/api/users', 'GET', $payload);
     }
+
+    public function resetPassword(int $id): void
+    {
+        $this->client->call('/api/users/reset-password/' . $id, 'GET');
+    }
 }
