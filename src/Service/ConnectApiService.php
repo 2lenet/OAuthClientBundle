@@ -31,4 +31,9 @@ class ConnectApiService
     {
         return $this->client->call('/api/users/' . $id, 'DELETE');
     }
+
+    public function list(array $payload): array
+    {
+        return $this->client->call('/api/users', 'GET', $payload);
+    }
 }

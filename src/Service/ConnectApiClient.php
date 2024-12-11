@@ -17,9 +17,13 @@ class ConnectApiClient
 
     public function call(string $url, string $method, array $data = [])
     {
-        $response = $this->getClient()->request($method, $url, [
-            'json' => $data,
-        ]);
+        $options = [];
+        if ($method === 'GET') {
+            $options['query'] = $data;
+        } else {
+            $options['json'] = $data;
+        }
+        $response = $this->getClient()->request($method, $url, $options);
 
         $this->checkErrors($response);
 
