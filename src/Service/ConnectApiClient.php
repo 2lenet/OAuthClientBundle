@@ -3,6 +3,7 @@
 namespace Lle\OAuthClientBundle\Service;
 
 use Lle\OAuthClientBundle\Exception\ConnectException;
+use Lle\OAuthClientBundle\Exception\ConnectNotFoundException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -33,7 +34,7 @@ class ConnectApiClient
     protected function checkErrors(ResponseInterface $response): void
     {
         if ($response->getStatusCode() === 404) {
-            throw new ConnectException('Not found', ConnectException::NOT_FOUND);
+            throw new ConnectNotFoundException();
         }
 
         if ($response->getStatusCode() !== 200) {
@@ -43,6 +44,11 @@ class ConnectApiClient
                 $error = json_decode($errorJson, true);
 
                 $code = $error['code'] ?? ConnectException::UNKNOWN_ERROR;
+
+                if ($code === ConnectException::NOT_FOUND) {
+                    throw new ConnectNotFoundException();
+                }
+
                 $message = $error['message'] ?? 'Unknown error';
                 $data = $error['data'] ?? [];
 
