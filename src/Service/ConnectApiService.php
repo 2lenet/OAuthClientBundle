@@ -41,4 +41,9 @@ class ConnectApiService
     {
         $this->client->call('/api/users/reset-password/' . $id, 'GET');
     }
+
+    public function authenticatorQrCode(int $id): array
+    {
+        return $this->client->call('/api/users/authenticator-qr-code/' . $id, 'GET');
+    }
 }
