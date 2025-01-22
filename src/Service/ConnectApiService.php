@@ -2,9 +2,6 @@
 
 namespace Lle\OAuthClientBundle\Service;
 
-use Lle\OAuthClientBundle\Dto\Api\ProfileDto;
-use Lle\OAuthClientBundle\Dto\Api\UserDto;
-
 class ConnectApiService
 {
     public function __construct(
