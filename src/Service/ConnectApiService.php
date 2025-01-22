@@ -5,7 +5,7 @@ namespace Lle\OAuthClientBundle\Service;
 class ConnectApiService
 {
     public function __construct(
-        private ConnectApiClient $client
+        protected ConnectApiClient $client
     ) {
     }
 
