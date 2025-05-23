@@ -37,7 +37,7 @@ class LleResourceOwner implements ResourceOwnerInterface
     /**
      * Last name of the user
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->get('nom');
     }
@@ -45,7 +45,7 @@ class LleResourceOwner implements ResourceOwnerInterface
     /**
      * First name of the user
      */
-    public function getPrenom(): string
+    public function getPrenom(): ?string
     {
         return $this->get('prenom');
     }
@@ -53,7 +53,7 @@ class LleResourceOwner implements ResourceOwnerInterface
     /**
      * Code client of the user
      */
-    public function getCodeClient(): string
+    public function getCodeClient(): ?string
     {
         return $this->get('codeClient');
     }
@@ -82,7 +82,7 @@ class LleResourceOwner implements ResourceOwnerInterface
          return $this->get('a2f_activated');
      }
 
-     public function getMobile(): string
+     public function getMobile(): ?string
      {
          return $this->get('mobile');
      }
@@ -92,17 +92,17 @@ class LleResourceOwner implements ResourceOwnerInterface
          return $this->get('data');
      }
 
-     public function getProfiles(): array
+     public function getProfiles(): ?array
      {
          return $this->get('profiles');
      }
 
-     public function getTimezone(): string
+     public function getTimezone(): ?string
      {
          return $this->get('timezone');
      }
 
-     public function getLocale(): string
+     public function getLocale(): ?string
      {
          return $this->get('locale');
      }
