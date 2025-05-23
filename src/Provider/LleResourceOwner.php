@@ -7,8 +7,7 @@ use League\OAuth2\Client\Token\AccessToken;
 
 class LleResourceOwner implements ResourceOwnerInterface
 {
-    /** @var array */
-    private $data;
+    private array $data;
 
     /**
      * Creates a new resource owner.
@@ -21,99 +20,97 @@ class LleResourceOwner implements ResourceOwnerInterface
     }
     /**
      * Returns the identifier of the authorized resource owner.
-     *
-     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return (int) $this->get('id');
     }
 
     /**
      * Username of the user.
-     *
-     * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->get('username');
     }
 
     /**
      * Last name of the user
-     *
-     * @return string
      */
-    public function getNom()
+    public function getNom(): ?string
     {
         return $this->get('nom');
     }
 
     /**
      * First name of the user
-     *
-     * @return string
      */
-    public function getPrenom()
+    public function getPrenom(): ?string
     {
         return $this->get('prenom');
     }
 
     /**
      * Code client of the user
-     *
-     * @return string
      */
-    public function getCodeClient()
+    public function getCodeClient(): ?string
     {
         return $this->get('codeClient');
     }
 
     /**
      * Email address of the user.
-     *
-     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->get('email');
     }
 
     /**
      * Roles the user has
-     *
-     * @return array
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         return $this->get('roles');
     }
 
     /**
      * Whether the user has activated 2 factor authentication
-     * @return bool
      */
-     public function getA2fActivated()
+     public function getA2fActivated(): ?bool
      {
          return $this->get('a2f_activated');
      }
 
-     public function getMobile()
+     public function getMobile(): ?string
      {
          return $this->get('mobile');
      }
 
-     public function getData()
+     public function getData(): ?array
      {
          return $this->get('data');
      }
 
+     public function getProfiles(): array
+     {
+         return $this->get('profiles');
+     }
+
+     public function getTimezone(): ?string
+     {
+         return $this->get('timezone');
+     }
+
+     public function getLocale(): ?string
+     {
+         return $this->get('locale');
+     }
+
     /**
      * Return all of the owner details available as an array.
-     *
-     * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->data;
     }
