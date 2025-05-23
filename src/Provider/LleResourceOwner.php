@@ -77,7 +77,7 @@ class LleResourceOwner implements ResourceOwnerInterface
     /**
      * Whether the user has activated 2 factor authentication
      */
-     public function getA2fActivated(): bool
+     public function getA2fActivated(): ?bool
      {
          return $this->get('a2f_activated');
      }
@@ -92,7 +92,7 @@ class LleResourceOwner implements ResourceOwnerInterface
          return $this->get('data');
      }
 
-     public function getProfiles(): ?array
+     public function getProfiles(): array
      {
          return $this->get('profiles');
      }
