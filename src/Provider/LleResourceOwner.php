@@ -87,7 +87,7 @@ class LleResourceOwner implements ResourceOwnerInterface
          return $this->get('mobile');
      }
 
-     public function getData(): array
+     public function getData(): ?array
      {
          return $this->get('data');
      }
