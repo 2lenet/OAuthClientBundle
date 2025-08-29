@@ -107,7 +107,7 @@ class OAuth2Service
             'redirectUri' => $redirectUri,
             'urlAuthorize' => $domain . 'authorize',
             'urlAccessToken' => $api . 'token',
-            'urlResourceOwnerDetails' => $api . 'user-details'
+            'urlResourceOwnerDetails' => $api . 'user-details',
         ]);
     }
 }

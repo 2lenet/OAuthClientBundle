@@ -1,3 +1,0 @@
-twig:
-    paths:
-        "%kernel.root_dir%/../vendor/2lenet/oauth-client-bundle/src/Resources/views/templates": "OAuthClientBundle"

@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class OAuthClientExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
@@ -22,16 +22,8 @@ class OAuthClientExtension extends Extension
         $container->setParameter('lle.oauth_client.api_user', $config['api_user']);
         $container->setParameter('lle.oauth_client.api_password', $config['api_password']);
 
-        $container->setParameter('lle.oauth_client.class_user', $config['class_user']);
-        $container->setParameter('lle.oauth_client.token_name', $config['token_name']);
-        $container->setParameter('lle.oauth_client.header_token_name', $config['header_token_name']);
-        $container->setParameter('lle.oauth_client.token_type', $config['token_type']);
-        $container->setParameter('lle.oauth_client.token_name_field', $config['token_name_field']);
-        $container->setParameter('lle.oauth_client.key_field', $config['key_field']);
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
-        $loader->load('form.yaml');
     }
 
     public function getAlias(): string

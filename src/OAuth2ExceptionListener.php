@@ -10,10 +10,10 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * S'il y a une erreur OAuth2 (typiquement Invalid state ou quand on fait des F5),
- * on essaie de refaire un login
- * Au bout de MAX_NUMBER_TRIES_ERROR_SESSION_KEY tentatives on affiche un message d'erreur générique
- * (le message d'erreur est une page dans Connect)
+ * If there is an OAuth2 error (typically "Invalid state"),
+ * we try to login again
+ * After MAX_NUMBER_TRIES_ERROR_SESSION_KEY tries, we show the user a generic error page
+ * (the page is inside Connect)
  */
 class OAuth2ExceptionListener
 {
@@ -49,7 +49,7 @@ class OAuth2ExceptionListener
                 referenceType: UrlGeneratorInterface::ABSOLUTE_URL
             );
 
-            // rediriger sur logout avec redirection 'erreur'
+            // if there are too many attemps, we redirect to a generic error page
             $event->setResponse(
                 new RedirectResponse($oauthPublicUrl . 'login-failure?retry_url=' . $retryUrl)
             );

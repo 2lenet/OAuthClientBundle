@@ -30,7 +30,7 @@ class ConnectApiClient
 
         return json_decode($response->getContent(false), true);
     }
-    
+
     protected function checkErrors(ResponseInterface $response): void
     {
         if ($response->getStatusCode() === 404) {
@@ -58,7 +58,7 @@ class ConnectApiClient
                 throw $exception;
             } else {
                 $message = 'Unknown error';
-                $hint = strstr($errorJson,"\n",true);
+                $hint = strstr($errorJson, "\n", true);
                 if (str_starts_with($hint, '<!--')) {
                     // Symfony on dev mode prints the exception in the first line
                     $message .= ' (hint: ' . $hint . ')';
@@ -79,7 +79,7 @@ class ConnectApiClient
 
         return $this->httpClient->withOptions([
             'base_uri' => $baseUri,
-            'auth_basic' => [$user, $password]
+            'auth_basic' => [$user, $password],
         ]);
     }
 }

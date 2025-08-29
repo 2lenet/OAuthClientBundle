@@ -4,33 +4,15 @@ services:
         public: false
         autoconfigure: true
 
-    lle_oauth_user_provider:
-        class: Lle\OAuthClientBundle\Security\User\UserProvider
-
-    lle_oauth_guard:
-        class: Lle\OAuthClientBundle\Security\Guard\OAuthGuardAuthenticator
-
-    lle_oauth_token:
-        class: Lle\OAuthClientBundle\Security\Guard\TokenAuthenticator
-        arguments: ['@doctrine.orm.default_entity_manager', '@parameter_bag']
-
     Lle\OAuthClientBundle\Service\OAuthApi:
-        arguments: ['%lle.oauth_client.apiconnect%','%lle.oauth_client.api_user%', '%lle.oauth_client.api_password%']
+        arguments: [ '%lle.oauth_client.apiconnect%','%lle.oauth_client.api_user%', '%lle.oauth_client.api_password%' ]
 
     Lle\OAuthClientBundle\Service\OAuth2Service:
         class: Lle\OAuthClientBundle\Service\OAuth2Service
 
-    Lle\OAuthClientBundle\Controller\UserAdminController:
-        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi', '@translator']
-        tags: ['controller.service_arguments']
-
     Lle\OAuthClientBundle\Controller\SecurityController:
-        arguments: ['@parameter_bag', '@security.token_storage', '@Lle\OAuthClientBundle\Service\OAuth2Service']
-        tags: ['controller.service_arguments']
-
-    Lle\OAuthClientBundle\Controller\JsonSecurityController:
-        arguments: ['@Lle\OAuthClientBundle\Service\OAuthApi','@doctrine.orm.default_entity_manager', '@parameter_bag', '@event_dispatcher']
-        tags: ['controller.service_arguments']
+        arguments: [ '@parameter_bag', '@security.token_storage', '@Lle\OAuthClientBundle\Service\OAuth2Service' ]
+        tags: [ 'controller.service_arguments' ]
 
     Lle\OAuthClientBundle\Service\ConnectApiClient:
         class: Lle\OAuthClientBundle\Service\ConnectApiClient
@@ -39,4 +21,4 @@ services:
         class: Lle\OAuthClientBundle\Service\ConnectApiService
 
     Lle\OAuthClientBundle\OAuth2ExceptionListener:
-        tags: [kernel.event_listener]
+        tags: [ kernel.event_listener ]
