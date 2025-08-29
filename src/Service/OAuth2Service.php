@@ -3,6 +3,7 @@
 namespace Lle\OAuthClientBundle\Service;
 
 use League\OAuth2\Client\Provider\GenericProvider;
+use League\OAuth2\Client\Token\AccessToken;
 use Lle\OAuthClientBundle\Exception\OAuth2Exception;
 use Lle\OAuthClientBundle\Provider\LleProvider;
 use Lle\OAuthClientBundle\Provider\LleResourceOwner;
@@ -14,8 +15,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class OAuth2Service
 {
     public function __construct(
-        private ParameterBagInterface $parameters,
-        private UrlGeneratorInterface $urlGenerator,
+        protected ParameterBagInterface $parameters,
+        protected UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -42,11 +43,12 @@ class OAuth2Service
         return $code;
     }
 
-    public function fetchRessourceOwner(string $authorizationCode)
+    public function fetchRessourceOwner(string $authorizationCode): LleResourceOwner
     {
         $provider = $this->getProvider();
-        
+
         // Try to get an access token using the authorization code grant.
+        /** @var AccessToken $accessToken */
         $accessToken = $provider->getAccessToken('authorization_code', [
             'code' => $authorizationCode,
         ]);
@@ -54,22 +56,6 @@ class OAuth2Service
         // Using the access token, we may look up details about the
         // resource owner.
         return new LleResourceOwner($provider->getResourceOwner($accessToken)->toArray());
-    }
-
-    public function getAuthenticatedRequest($path)
-    {
-        // J'ai copié cet exemple de la doc, à voir s'il est exploitable.
-        // (permet apparemment d'appeler connect avec son token, utile pour une API yay)
-        // The provider provides a way to get an authenticated API request for
-        // the service, using the access token; it returns an object conforming
-        // to Psr\Http\Message\RequestInterface.
-        $api = $this->parameters->get('lle.oauth_client.apiconnect');
-
-        $request = $provider->getAuthenticatedRequest(
-            'GET',
-            $api . $path,
-            $accessToken
-        );
     }
 
     public function authorize(Request $request): RedirectResponse
@@ -93,12 +79,21 @@ class OAuth2Service
         return new RedirectResponse($authorizationUrl);
     }
 
-    private function getProvider(): GenericProvider
+    public function getProvider(): GenericProvider
     {
+        /** @var string $clientId */
         $clientId = $this->parameters->get('lle.oauth_client.client_id');
+
+        /** @var string $clientSecret */
         $clientSecret = $this->parameters->get('lle.oauth_client.client_secret');
+
+        /** @var string $redirectRoute */
         $redirectRoute = $this->parameters->get('lle.oauth_client.redirect_route');
+
+        /** @var string $domain */
         $domain = $this->parameters->get('lle.oauth_client.domain');
+
+        /** @var string $api */
         $api = $this->parameters->get('lle.oauth_client.apiconnect');
 
         $redirectUri = $this->urlGenerator->generate(

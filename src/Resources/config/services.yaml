@@ -37,3 +37,6 @@ services:
 
     Lle\OAuthClientBundle\Service\ConnectApiService:
         class: Lle\OAuthClientBundle\Service\ConnectApiService
+
+    Lle\OAuthClientBundle\OAuth2ExceptionListener:
+        tags: [kernel.event_listener]
