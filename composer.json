@@ -4,7 +4,7 @@
     "description": "The 2LE's OAuth Client Bundle.",
     "license": "MIT",
     "require": {
-        "php": ">=8.4",
+        "php": ">=8.1",
         "league/oauth2-client": "^2.7"
     },
     "autoload": {
