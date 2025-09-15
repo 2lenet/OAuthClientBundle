@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class OAuth2ExceptionListener
 {
-    public const string NUMBER_TRIES_ERROR_SESSION_KEY = 'lle_oauth2_client_number_tries_error';
-    public const int MAX_NUMBER_TRIES_ERROR_SESSION_KEY = 3;
+    public const NUMBER_TRIES_ERROR_SESSION_KEY = 'lle_oauth2_client_number_tries_error';
+    public const MAX_NUMBER_TRIES_ERROR_SESSION_KEY = 3;
 
     public function __construct(
         protected OAuth2Service $oauth2Service,
