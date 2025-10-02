@@ -78,6 +78,11 @@ class LleResourceOwner implements ResourceOwnerInterface
         return $this->get('locale');
     }
 
+    public function getAllowedIps(): ?array
+    {
+        return $this->get('allowedIps');
+    }
+
     /**
      * Return all of the owner details available as an array.
      */
